@@ -6,6 +6,7 @@
 ;; use 'M-x doom/reload'.
 
 
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
@@ -48,3 +49,6 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+;; highlighting phrases/lines
+(package! highlight)

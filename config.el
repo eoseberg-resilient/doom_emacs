@@ -27,6 +27,9 @@
 (global-set-key (kbd "M-{") 'centaur-tabs-move-current-tab-to-left)
 (global-set-key (kbd "M-}") 'centaur-tabs-move-current-tab-to-right)
 
+; undo window setup change
+(global-set-key (kbd "C-x 9") 'winner-undo)
+(global-set-key (kbd "C-x 8") 'winner-redo)
 
 (defun shrink-horisontal-ten ()
   (interactive)
@@ -76,8 +79,39 @@
 ;; ide stuff
 ; go to definition and look up references
 (global-set-key (kbd "<f12>") '+lookup/definition)
-(global-set-key (kbd "<f9>") '+lookup/references)
-(global-set-key (kbd "S-<f9>") '+lookup/implementations)
+(global-set-key (kbd "<f9>") '+lookup/implementations)
+(global-set-key (kbd "S-<f9>") '+lookup/references)
+
+; bring up snippets for current lsp-mode lang
+(global-set-key (kbd "<f5>") 'yas-insert-snippet)
+(global-set-key (kbd "S-<f5>") 'company-yasnippet)
+
+; GOLANG
+;
+(setenv "GOPATH" "/home/eoseberg/repos/go")
+(setenv "GOROOT" "/usr/local/go")
+(setenv "GO111MODE" "on")
+(setenv "CGO_ENABLED" "1")
+(setenv "GOPRIVATE" "github.com/resilientplc")
+(setenv "GOFLAGS" "-tags=integration,wireinject,test,unit,tools")
+;; organizing imports automatically
+;(add-hook 'go-mode-hook #'lsp-deferred)
+;; Make sure you don't have other goimports hooks enabled.
+;(defun lsp-go-install-save-hooks ()
+;    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+; gopls doesn't check for everything, lets add some stuff
+(after! eglot
+(setq  lsp-go-analyses '((fieldalignment . t)         ; find structs that would use less memory if their fields were sorted
+                           (nilness . t)                ; check for redundant or impossible nil comparisons
+                           (shadow . t)                 ; check for possible unintended shadowing of variables
+                           (unusedparams . t)           ; check for unused parameters of functions
+                           (unusedwrite . t)            ; checks for unused writes
+                           (useany . t)                 ; check for constraints that could be simplified to “any”
+                           (unusedvariable . t)))       ; check for unused variables
+)
+
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
