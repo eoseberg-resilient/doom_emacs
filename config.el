@@ -11,21 +11,22 @@
   (interactive)
   (other-window -1))
 
-(global-set-key (kbd "C-{") 'prev-window)
-(global-set-key (kbd "C-}") 'other-window)
+; switch between tabs
+(global-set-key (kbd "C-{") 'centaur-tabs-backward-tab)
+(global-set-key (kbd "C-}") 'centaur-tabs-forward-tab)
+
+; move tabs around with META-{ or META-}
+(global-set-key (kbd "M-{") 'centaur-tabs-move-current-tab-to-left)
+(global-set-key (kbd "M-}") 'centaur-tabs-move-current-tab-to-right)
 
 ; tabs
 (global-set-key (kbd "C-x t ESC") 'centaur-tabs-mode)
 (global-set-key (kbd "C-x t n") 'centaur-tabs--create-new-tab)
 (global-set-key (kbd "C-x t w") 'centaur-tabs--kill-this-buffer-dont-ask)
 
-;switch tabs forward with CTRL-TAB and backwards with CTRL-SHIFT-TAB
-(global-set-key (kbd "C-<tab>") 'centaur-tabs-forward-tab)
-(global-set-key (kbd "C-<iso-lefttab>") 'centaur-tabs-backward-tab)
-
-; move tabs around with META-{ or META-}
-(global-set-key (kbd "M-{") 'centaur-tabs-move-current-tab-to-left)
-(global-set-key (kbd "M-}") 'centaur-tabs-move-current-tab-to-right)
+;switch split buffers forward with CTRL-TAB and backwards with CTRL-SHIFT-TAB
+(global-set-key (kbd "C-<tab>") 'other-window)
+(global-set-key (kbd "C-<iso-lefttab>") 'prev-window)
 
 ; undo window setup change
 (global-set-key (kbd "C-x 9") 'winner-undo)
@@ -66,6 +67,8 @@
 (global-set-key (kbd "C-<down>")  (kbd "C-u 5 <down>"))
 (global-set-key (kbd "C-<left>")  'left-word)
 (global-set-key (kbd "C-<right>") 'right-word)
+
+(global-set-key (kbd "M-a") 'end-of-line)
 
 ;; neotree
 (global-set-key (kbd "C-b") 'neotree-toggle)
